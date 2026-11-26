@@ -42,3 +42,21 @@ bun run build
 
 `bun run build` emits the Worker and static assets, then `scripts/postbuild.mjs`
 strips source maps and hidden files so `deploy.json` can point at `dist/`.
+
+## Resume
+
+`public/resume/mohammed-naveed-a-resume.pdf` is printed from
+`scripts/resume.html`. To regenerate it after editing the HTML:
+
+```sh
+chrome --headless=new --no-pdf-header-footer \
+  --print-to-pdf=public/resume/mohammed-naveed-a-resume.pdf \
+  "file:///$PWD/scripts/resume.html"
+```
+
+## Deploy
+
+Every push to `main` builds the site on GitHub Actions and publishes
+`dist/client` to GitHub Pages — https://muhammednavd.github.io/naveed-field-log/
+— via `.github/workflows/deploy.yml`. The workflow sets `GITHUB_PAGES=true`, so
+Vite emits assets under `/naveed-field-log/` instead of the domain root.
