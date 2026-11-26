@@ -57,6 +57,6 @@ chrome --headless=new --no-pdf-header-footer \
 ## Deploy
 
 Every push to `main` builds the site on GitHub Actions and publishes
-`dist/client` to GitHub Pages — https://muhammednavd.github.io/naveed-field-log/
+`dist/client` to GitHub Pages — https://muhammednavd.github.io/my-portfolio/
 — via `.github/workflows/deploy.yml`. The workflow sets `GITHUB_PAGES=true`, so
-Vite emits assets under `/naveed-field-log/` instead of the domain root.
+Vite emits assets under `/my-portfolio/` instead of the domain root.

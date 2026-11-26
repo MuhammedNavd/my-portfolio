@@ -5,7 +5,7 @@ import { defineConfig } from 'vite'
 
 export default defineConfig({
   // GitHub Pages serves the project under /<repo>/, Workers serves it at the root.
-  base: process.env.GITHUB_PAGES ? '/naveed-field-log/' : '/',
+  base: process.env.GITHUB_PAGES ? '/my-portfolio/' : '/',
   plugins: [react(), tailwindcss(), cloudflare()],
   server: { port: 5360, strictPort: false },
 })
