@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mohammed Naveed A — Resume</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 11mm 12mm;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+        font-size: 9.1pt;
+        line-height: 1.42;
+        color: #16202a;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      header {
+        border-bottom: 1.4pt solid #0d2b33;
+        padding-bottom: 6px;
+        margin-bottom: 9px;
+      }
+      h1 {
+        margin: 0;
+        font-size: 20pt;
+        letter-spacing: 0.01em;
+        color: #0b1b22;
+      }
+      .role {
+        margin: 1px 0 4px;
+        font-size: 9.4pt;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #0f6b78;
+        font-weight: 600;
+      }
+      .contact {
+        font-size: 8.5pt;
+        color: #43535f;
+        letter-spacing: 0.02em;
+      }
+      .contact span + span::before {
+        content: '·';
+        margin: 0 5px;
+        color: #9aa9b4;
+      }
+      section {
+        margin-bottom: 8px;
+      }
+      h2 {
+        margin: 0 0 4px;
+        font-size: 8.2pt;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: #0f6b78;
+      }
+      p {
+        margin: 0 0 4px;
+      }
+      .job {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 10px;
+        margin-bottom: 1px;
+      }
+      .job strong {
+        font-size: 10pt;
+        color: #0b1b22;
+      }
+      .job .when {
+        font-size: 8.4pt;
+        color: #43535f;
+        white-space: nowrap;
+      }
+      .org {
+        font-size: 8.6pt;
+        color: #43535f;
+        margin-bottom: 3px;
+      }
+      ul {
+        margin: 0;
+        padding-left: 13px;
+      }
+      li {
+        margin-bottom: 2.2px;
+      }
+      li::marker {
+        color: #0f6b78;
+      }
+      .skills {
+        display: grid;
+        grid-template-columns: 96px 1fr;
+        gap: 1px 8px;
+      }
+      .skills dt {
+        font-weight: 600;
+        color: #0b1b22;
+      }
+      .skills dd {
+        margin: 0;
+      }
+      .split {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      .plain {
+        list-style: none;
+        padding: 0;
+      }
+      .plain li {
+        margin-bottom: 2px;
+      }
+      .row {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .row .when {
+        color: #43535f;
+        white-space: nowrap;
+      }
+      .muted {
+        color: #43535f;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Mohammed Naveed A</h1>
+      <div class="role">Senior Software Engineer · .NET · Azure · AI-native systems</div>
+      <div class="contact">
+        <span>Chennai, India (IST, UTC+05:30)</span>
+        <span>+91 6369525936</span>
+        <span>mohammednaveeda10@gmail.com</span>
+        <span>linkedin.com/in/muhammednaveed</span>
+      </div>
+    </header>
+
+    <section>
+      <p>
+        Backend and cloud engineer with 4+ years building production systems for a US enterprise client. Migrated 40+
+        legacy platforms to modern .NET and EF Core (75% performance gain), closed 313 SAST findings, and shipped
+        AI-native features with LLM APIs, agents and MCP — with zero post-launch incidents across backend, web and
+        mobile releases. Lead a 14-person cross-functional team from requirement to release.
+      </p>
+    </section>
+
+    <section>
+      <h2>Experience</h2>
+      <div class="job">
+        <strong>Senior Software Engineer</strong>
+        <span class="when">May 2022 — Present</span>
+      </div>
+      <div class="org">Ideassion Technology Solutions · Client: Buckman Laboratories International (US)</div>
+      <ul>
+        <li>
+          Shipped backend, web and mobile applications to production with zero post-launch issues, building ASP.NET
+          Core APIs and microservices on SQL Server.
+        </li>
+        <li>
+          Led a 14-engineer cross-functional team across backend, web and mobile; delivered 4 client projects on time.
+        </li>
+        <li>
+          Migrated 40+ legacy projects to modern .NET and EF Core, improving performance by 75% and removing a decade
+          of technical debt.
+        </li>
+        <li>
+          Cut manual turnaround by 80% by automating background jobs with schedulers and SMTP notification workflows.
+        </li>
+        <li>
+          Built and optimised RESTful APIs for high-volume processing and third-party integration, standardising
+          OpenAPI/Swagger contracts to unblock UI and partner teams.
+        </li>
+        <li>
+          Authored Software Design Documents covering 100% of functional requirements for a multi-customer chemical
+          billing and profitability platform.
+        </li>
+        <li>
+          Resolved 313+ Checkmarx SAST findings (SQL injection, XSS, CSRF, broken access control) and embedded SAST
+          scanning in Azure DevOps release pipelines.
+        </li>
+      </ul>
+      <div class="job" style="margin-top: 5px">
+        <strong>Software Engineer Trainee</strong>
+        <span class="when">Jan 2022 — Apr 2022</span>
+      </div>
+      <div class="org">Ideassion Technology Solutions · Chennai</div>
+    </section>
+
+    <section>
+      <h2>Selected projects</h2>
+      <ul>
+        <li>
+          <strong>AI-native logistics platform</strong> — agent framework for route optimisation and inventory
+          forecasting; cargo dashboards handling 5,000+ daily shipments; 25% lower delivery TAT, 99.9% tracking
+          accuracy.
+        </li>
+        <li>
+          <strong>Product predictor / AP engine</strong> — survey-driven treatment programme calculation over PIMS and
+          BUPR data (5,000+ catalog items); 60% faster proposal generation.
+        </li>
+        <li>
+          <strong>3PC controller calibration</strong> — event-driven Azure Functions and IoT Hub services enabling
+          remote 1- and 2-point sensor calibration with slope/offset correction.
+        </li>
+        <li>
+          <strong>Aggregated inventory &amp; pricing</strong> — real-time container, delivery and site stock tracking
+          with revenue models at 99.9% pricing accuracy.
+        </li>
+        <li>
+          <strong>Live chat transcript pipeline</strong> — Social Intents webhooks, pooled HttpClient and retry
+          policies; 99.9% message retention, 15 hours saved weekly.
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Technical skills</h2>
+      <dl class="skills">
+        <dt>Languages</dt>
+        <dd>C#, TypeScript, JavaScript, SQL</dd>
+        <dt>Backend</dt>
+        <dd>ASP.NET Core, Web API, EF Core, Dapper, LINQ, microservices, modular monoliths, REST, OpenAPI/Swagger</dd>
+        <dt>Azure</dt>
+        <dd>App Service, Functions, Entra ID, Service Bus, Event Hubs, IoT Hub, Cosmos DB, App Configuration, App Insights, CI/CD (Azure DevOps)</dd>
+        <dt>Data</dt>
+        <dd>SQL Server, PostgreSQL, MySQL, indexing and query tuning, stored procedures</dd>
+        <dt>Frontend</dt>
+        <dd>React, Redux, Saga, Vite, Bootstrap</dd>
+        <dt>AI</dt>
+        <dd>LLM APIs, AI agents, Model Context Protocol (MCP), Claude, Microsoft Foundry</dd>
+        <dt>Quality</dt>
+        <dd>NUnit, Checkmarx SAST, vulnerability remediation, code review, Agile</dd>
+        <dt>Also</dt>
+        <dd>AWS (EC2, S3, IAM), RabbitMQ, SMTP integration</dd>
+      </dl>
+    </section>
+
+    <section class="split">
+      <div>
+        <h2>Certifications</h2>
+        <ul class="plain">
+          <li>Azure Administrator Associate (AZ-104) — Microsoft</li>
+          <li>Azure Data Engineering (DP-700) — Microsoft</li>
+          <li>Azure Fundamentals (AZ-900) — Microsoft</li>
+          <li>Claude 101 — Anthropic</li>
+        </ul>
+      </div>
+      <div>
+        <h2>Education</h2>
+        <div class="row">
+          <span><strong>MCA</strong>, Computer Application</span>
+          <span class="when">Apr 2022</span>
+        </div>
+        <div class="muted">MEASI Institute of Information Technology, Chennai</div>
+        <div class="row" style="margin-top: 3px">
+          <span><strong>BCA</strong>, Computer Application</span>
+          <span class="when">Apr 2020</span>
+        </div>
+        <div class="muted">The New College, Chennai</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Languages</h2>
+      <p class="muted">English · Urdu · Tamil · Arabic · Hindi</p>
+    </section>
+  </body>
+</html>
