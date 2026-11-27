@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { MISSIONS, SIDE_MISSIONS } from '../content'
 import { cx } from '../lib/cx'
 import { Chapter } from './Chapter'
+import { MissionMap } from './MissionMap'
 import { Reveal } from './Reveal'
 
 /* Chapter 03: a mission selector driving a single detailed file. */
@@ -136,6 +137,8 @@ export function Missions() {
           </Reveal>
         ))}
       </div>
+
+      <MissionMap />
     </Chapter>
   )
 }

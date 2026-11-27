@@ -31,7 +31,8 @@ export const CHAPTERS: Chapter[] = [
   { id: 'missions', code: '03', label: 'Missions' },
   { id: 'arsenal', code: '04', label: 'Arsenal' },
   { id: 'record', code: '05', label: 'Record' },
-  { id: 'uplink', code: '06', label: 'Uplink' },
+  { id: 'ask', code: '06', label: 'Ask' },
+  { id: 'uplink', code: '07', label: 'Uplink' },
 ]
 
 export const HERO = {
@@ -303,6 +304,148 @@ export const SIDE_MISSIONS = [
   },
 ]
 
+/*
+  The mission map: the five layers every mission ran through, and the nodes
+  inside them. `missions` points at ids in MISSIONS so the diagram never drifts
+  from the case files.
+*/
+export type MapNode = { id: string; label: string; role: string; missions: string[] }
+export type MapLane = { code: string; label: string; note: string; nodes: MapNode[] }
+
+export const MISSION_MAP: MapLane[] = [
+  {
+    code: 'L1',
+    label: 'Signal sources',
+    note: 'where the data enters',
+    nodes: [
+      {
+        id: 'controllers',
+        label: 'IoT controllers',
+        role: 'Third-party water-treatment controllers streamed into the backend so a field engineer can recalibrate a sensor without travelling to site.',
+        missions: ['calibration'],
+      },
+      {
+        id: 'pims',
+        label: 'PIMS · BUPR',
+        role: 'Secure HTTPS channels into the cost, formulation and viscosity databases that feed the treatment-programme calculation.',
+        missions: ['predictor'],
+      },
+      {
+        id: 'shipments',
+        label: 'Shipment + stock',
+        role: 'Container, delivery and site-inventory events that drive live tracking, dispatch position and billing.',
+        missions: ['logistics', 'inventory'],
+      },
+    ],
+  },
+  {
+    code: 'L2',
+    label: 'Edge & transport',
+    note: 'how it moves',
+    nodes: [
+      {
+        id: 'functions',
+        label: 'Azure Functions',
+        role: 'Event-driven services that receive controller telemetry and run the 1- and 2-point calibration maths on the edge.',
+        missions: ['calibration'],
+      },
+      {
+        id: 'queues',
+        label: 'IoT Hub · Event Hubs',
+        role: 'Device ingress and the event stream carrying controller telemetry, Connected Lab analytics and CSV batches into one pipeline.',
+        missions: ['calibration'],
+      },
+      {
+        id: 'webhooks',
+        label: 'Webhooks + retries',
+        role: 'Pooled HTTP clients, custom retry policies and structured error logging for a third-party chat dependency that cannot lose a message.',
+        missions: ['transcripts'],
+      },
+    ],
+  },
+  {
+    code: 'L3',
+    label: 'Core services',
+    note: 'where the rules live',
+    nodes: [
+      {
+        id: 'apis',
+        label: 'ASP.NET Core APIs',
+        role: 'The microservice layer under every mission: contracts, validation and OpenAPI specs that UI and partner teams build against.',
+        missions: ['logistics', 'predictor', 'security', 'inventory', 'transcripts'],
+      },
+      {
+        id: 'data',
+        label: 'EF Core · SQL Server',
+        role: 'Schemas, migrations and the queries behind inventory, pricing computation and transcript storage.',
+        missions: ['predictor', 'inventory', 'transcripts'],
+      },
+      {
+        id: 'auth',
+        label: 'Auth & access',
+        role: 'Authentication and authorisation rebuilt across platform services to meet enterprise benchmarks and close access-control findings.',
+        missions: ['security'],
+      },
+      {
+        id: 'jobs',
+        label: 'Scheduled jobs',
+        role: 'Background schedulers and SMTP notification workflows that took 80% of the manual turnaround out of the process.',
+        missions: ['inventory', 'transcripts'],
+      },
+    ],
+  },
+  {
+    code: 'L4',
+    label: 'Intelligence',
+    note: 'where it decides',
+    nodes: [
+      {
+        id: 'agents',
+        label: 'Agent framework',
+        role: 'LLM-backed agents planning routes and forecasting inventory against live shipment data, cutting delivery turnaround by a quarter.',
+        missions: ['logistics'],
+      },
+      {
+        id: 'engine',
+        label: 'AP engine',
+        role: 'Deterministic calculation of treatment programmes, pH/CoC dosage specifications and biocide additives from an operational assessment.',
+        missions: ['predictor'],
+      },
+      {
+        id: 'llm',
+        label: 'LLM APIs · MCP',
+        role: 'Tool-calling interfaces that let agents read and write enterprise workflows without handing them the keys.',
+        missions: ['logistics'],
+      },
+    ],
+  },
+  {
+    code: 'L5',
+    label: 'Surfaces',
+    note: 'what people touch',
+    nodes: [
+      {
+        id: 'dashboards',
+        label: 'React dashboards',
+        role: 'A modular, typed component library for monitoring routes, cargo and calibration runs.',
+        missions: ['logistics'],
+      },
+      {
+        id: 'tracking',
+        label: 'Next.js tracking',
+        role: 'Cargo-tracking surfaces handling 5,000+ daily shipments, with resilient REST endpoints and real error handling.',
+        missions: ['logistics'],
+      },
+      {
+        id: 'pipeline',
+        label: 'Release pipeline',
+        role: 'Azure DevOps CI/CD with Checkmarx SAST wired into the release, so insecure code cannot reach production.',
+        missions: ['security'],
+      },
+    ],
+  },
+]
+
 export type SkillGroup = { label: string; note: string; items: string[]; accent?: boolean }
 
 export const ARSENAL: SkillGroup[] = [
@@ -401,6 +544,18 @@ export const RECORD = {
     },
   ],
   languages: ['English', 'Urdu', 'Tamil', 'Arabic', 'Hindi'],
+}
+
+/* Chapter 06: the grounded question box. Its answers live in lib/askNaveed.ts. */
+export const ASK = {
+  kicker: 'Grounded assistant',
+  title: 'Ask the log, not the résumé.',
+  lead: 'A question box wired to the same field log you are reading — the missions, the numbers, the stack, the credentials. It retrieves and quotes, so it cannot invent a project you would then have to check.',
+  note: 'retrieval · no model',
+  greeting:
+    'Ask about the missions, the stack, the numbers, the credentials or the availability. I answer only from this log — if something is not in here, I will say so and point you at the open channel.',
+  footnote:
+    'Answers are matched against hand-written entries built from this page, not generated. Nothing here leaves your browser.',
 }
 
 export const UPLINK = {

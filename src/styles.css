@@ -126,6 +126,26 @@
   }
 }
 
+/*
+  Custom pointer. The layer only becomes visible on a fine pointer; the class
+  is added by the effect, so a keyboard or touch visitor never gets a hidden
+  caret, and a failed script leaves the native cursor in place.
+*/
+.cursor-layer {
+  display: none;
+}
+@media (pointer: fine) {
+  .cursor-layer {
+    display: block;
+  }
+  html.custom-cursor,
+  html.custom-cursor *,
+  html.custom-cursor *::before,
+  html.custom-cursor *::after {
+    cursor: none !important;
+  }
+}
+
 /* Instrument panel surface. */
 @utility panel {
   border: 1px solid rgb(143 247 255 / 0.13);

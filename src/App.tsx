@@ -1,7 +1,9 @@
 import { MotionConfig } from 'motion/react'
 
 import { Arsenal } from './components/Arsenal'
+import { AskNaveed } from './components/AskNaveed'
 import { Backdrop } from './components/Backdrop'
+import { Cursor } from './components/Cursor'
 import { Footer } from './components/Footer'
 import { Hero } from './components/Hero'
 import { Hud } from './components/Hud'
@@ -17,6 +19,7 @@ export function App() {
   return (
     <MotionConfig reducedMotion="user">
       <Backdrop />
+      <Cursor />
       <div className="relative z-10">
         <a
           href="#main"
@@ -34,6 +37,7 @@ export function App() {
           <Missions />
           <Arsenal />
           <Record />
+          <AskNaveed />
           <Uplink />
         </main>
         <Footer />
