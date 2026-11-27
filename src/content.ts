@@ -36,7 +36,7 @@ export const CHAPTERS: Chapter[] = [
 ]
 
 export const HERO = {
-  eyebrow: 'Field log · operator MN-04',
+  eyebrow: 'Field log · operator MN',
   title: ['I keep the machine', 'running. Then I', 'teach it to think.'],
   body: 'Four years in production systems: forty legacy platforms rebuilt, three hundred security findings closed, and AI agents shipped into live enterprise workflows — without a single post-launch incident.',
   primary: { label: 'Read the log', href: '#prologue' },

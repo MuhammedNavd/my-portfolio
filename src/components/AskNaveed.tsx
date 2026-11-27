@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'motion/react'
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, MessageSquare } from 'lucide-react'
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 
 import { ASK } from '../content'
@@ -25,7 +25,9 @@ export function AskNaveed() {
   const [value, setValue] = useState('')
   const [busy, setBusy] = useState(false)
   const [thinking, setThinking] = useState<string | null>(null)
+  const [askOnScreen, setAskOnScreen] = useState(false)
   const listRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
   const timers = useRef<number[]>([])
   const reduce = useRef(false)
 
@@ -33,6 +35,27 @@ export function AskNaveed() {
     reduce.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     return () => timers.current.forEach((id) => window.clearTimeout(id))
   }, [])
+
+  /* Hide the floating pill while the chapter itself is on screen — it would
+     otherwise sit on top of the box it is advertising. */
+  useEffect(() => {
+    const section = document.getElementById('ask')
+    if (!section) return
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) setAskOnScreen(entry.isIntersecting)
+      },
+      { rootMargin: '-8% 0px -24% 0px' },
+    )
+    observer.observe(section)
+    return () => observer.disconnect()
+  }, [])
+
+  const jumpToAsk = () => {
+    document.getElementById('ask')?.scrollIntoView({ behavior: reduce.current ? 'auto' : 'smooth', block: 'start' })
+    /* Focus once the smooth scroll has landed, so the field is ready to type in. */
+    window.setTimeout(() => inputRef.current?.focus({ preventScroll: true }), reduce.current ? 60 : 420)
+  }
 
   const last = messages.at(-1)
   const chips = last?.reply ? last.reply.follow : STARTERS
@@ -79,9 +102,9 @@ export function AskNaveed() {
         <div aria-hidden className="absolute -top-24 right-0 size-64 rounded-full bg-ice/[0.07] blur-[100px]" />
 
         <div className="relative flex flex-wrap items-center justify-between gap-2 border-b border-hair px-4 py-3 sm:px-5">
-          <span className="mono-label flex items-center gap-2 text-ice">
+                      <span className="mono-label flex items-center gap-2 text-ice">
             <span aria-hidden className="size-1.5 rounded-full bg-acid animate-breathe" />
-            ask mn-04
+            ask mn
           </span>
           <span className="mono-label text-[8px] text-dim">{ASK.note}</span>
         </div>
@@ -133,6 +156,7 @@ export function AskNaveed() {
               </label>
               <input
                 id="ask-input"
+                ref={inputRef}
                 value={value}
                 onChange={(event) => setValue(event.target.value)}
                 maxLength={160}
@@ -175,6 +199,19 @@ export function AskNaveed() {
           </aside>
         </div>
       </div>
+
+      {/* Floating entry point: the same idea as a chat badge, in the log's palette. */}
+      {!askOnScreen && (
+        <button
+          type="button"
+          onClick={jumpToAsk}
+          className="fixed right-4 bottom-4 z-40 flex h-12 items-center gap-2.5 rounded-full bg-ice pr-5 pl-4 text-void shadow-[0_18px_44px_-16px_rgb(143_247_255_/_0.75)] transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-acid sm:right-6 sm:bottom-6"
+        >
+          <MessageSquare aria-hidden className="size-[18px]" strokeWidth={2.1} />
+          <span className="font-display text-[13.5px] font-semibold tracking-[0.01em]">Ask Naveed</span>
+          <span aria-hidden className="size-2 rounded-full bg-acid shadow-[0_0_10px_2px_rgb(216_255_92_/_0.55)]" />
+        </button>
+      )}
     </Chapter>
   )
 }
@@ -194,7 +231,7 @@ function Bubble({ role, children }: { role: 'you' | 'log'; children: ReactNode }
         )}
       >
         <div className={cx('mono-label mb-2 text-[8px]', role === 'you' ? 'text-acid/80' : 'text-ice/75')}>
-          {role === 'you' ? 'you' : 'mn-04 · field log'}
+          {role === 'you' ? 'you' : 'mn · field log'}
         </div>
         {children}
       </div>
